@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     'drf_yasg',
     'channels',
 
+    'django_celery_results',
+    'django_celery_beat',
+
     'users',
     'orders',
     'products',
@@ -144,4 +147,20 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
+}
+
+# Celery settings
+CELERY_BROKER_URL = env.str('CELERY_BROKER_URL')
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+
+# Celery results backend
+CELERY_RESULT_BACKEND = 'django-db'
+
+
+CELERY_BEAT_SCHEDULE = {
+    'test-task': {
+        'task': 'users.tasks.test_task', # task for testing celery worker
+        'schedule': 10.0,
+    },
 }
