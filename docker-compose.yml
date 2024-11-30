@@ -12,5 +12,48 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+  django:
+    build:
+      context: .
+    container_name: django
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - DJANGO_SETTINGS_MODULE=coffee_shop.settings
+      - CELERY_BROKER_URL=${CELERY_BROKER_URL}
+
+  celery_worker:
+    build:
+      context: .
+    container_name: celery_worker
+    command: celery -A coffee_shop worker --loglevel=info
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+      - django
+
+  celery_beat:
+    build:
+      context: .
+    container_name: celery_beat
+    command: celery -A coffee_shop beat --loglevel=info
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+      - django
+
 volumes:
   postgres_data:
