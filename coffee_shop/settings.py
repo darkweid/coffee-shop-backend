@@ -147,6 +147,8 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': env.str('PAGINATION_PAGE_SIZE'),
 }
 
 # Celery settings
@@ -156,7 +158,6 @@ CELERY_TASK_SERIALIZER = 'json'
 
 # Celery results backend
 CELERY_RESULT_BACKEND = 'django-db'
-
 
 # CELERY_BEAT_SCHEDULE = {
 #     'test-task': {
