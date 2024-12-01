@@ -158,9 +158,9 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_BACKEND = 'django-db'
 
 
-CELERY_BEAT_SCHEDULE = {
-    'test-task': {
-        'task': 'users.tasks.test_task', # task for testing celery worker
-        'schedule': 10.0,
-    },
-}
+# CELERY_BEAT_SCHEDULE = {
+#     'test-task': {
+#         'task': 'users.tasks.test_task', # task for testing celery worker
+#         'schedule': 10.0,
+#     },
+# }
