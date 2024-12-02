@@ -77,4 +77,4 @@ logs-celery:
 	$(DOCKER_COMPOSE) logs -f $(CELERY_WORKER_CONTAINER)
 
 # First run: Build, up, apply migrations, and create superuser
-first-run: build up migrate createsuperuser
+first-run: build up migrate collectstatic createsuperuser
