@@ -17,8 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-from .views import home
+from .views import home, StaticInfoView
 
 urlpatterns = [
     path('', home, name='home'),
@@ -28,5 +29,9 @@ urlpatterns = [
     path('api/', include('orders.urls')),
     path('api/', include('cart.urls')),
     path('support-chat/', TemplateView.as_view(template_name='chat.html')),
+    path('api/static-info/', StaticInfoView.as_view(), name='static-info'),
+    # JWT tokens
+    path('access/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
 ]
