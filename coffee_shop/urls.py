@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import TemplateView
+
 from .views import home
 
 urlpatterns = [
@@ -25,5 +27,6 @@ urlpatterns = [
     path('api/', include('products.urls')),
     path('api/', include('orders.urls')),
     path('api/', include('cart.urls')),
+    path('support-chat/', TemplateView.as_view(template_name='chat.html')),
 
 ]

@@ -166,3 +166,15 @@ CELERY_RESULT_BACKEND = 'django-db'
 #         'schedule': 10.0,
 #     },
 # }
+
+
+ASGI_APPLICATION = 'coffee_shop.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('redis', 6379)],
+        },
+    },
+}
