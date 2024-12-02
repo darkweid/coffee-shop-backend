@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'channels',
     'django_filters',
+    'drf_spectacular',
 
     'django_celery_results',
     'django_celery_beat',
@@ -154,6 +155,16 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': env.str('PAGINATION_PAGE_SIZE'),
+
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Coffee Shop API',
+    'DESCRIPTION': 'API для сети кофеен.',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
 }
 
 SIMPLE_JWT = {
